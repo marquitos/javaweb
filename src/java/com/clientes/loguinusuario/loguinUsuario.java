@@ -21,6 +21,7 @@ import javax.servlet.http.HttpSession;
  */
 @WebServlet(name = "loguinUsuario", urlPatterns = {"/loguinUsuario"})
 public class loguinUsuario extends HttpServlet {
+    private String nombre,user, pass;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,7 +36,14 @@ public class loguinUsuario extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-        HttpSession session = request.getSession(true);
+        
+        user = request.getParameter("user");
+        pass = request.getParameter("pass");
+        if(user != null & pass != null)
+        {
+            HttpSession session = request.getSession(true);
+            
+        }
             
         
     }
