@@ -5,13 +5,41 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@include  file="WEB-INF/jspf/validarSession.jspf" %>
+<%
+   
+%>
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">        
+        <title>Listado de todos los clientes</title>
     </head>
     <body>
-        <h1>Hello World!</h1>
+        <table border="0">
+            
+            <tbody>
+                <tr>
+                    <td>Nombre</td>
+                    <td>Apellido</td>
+                    <td>Direccion</td>
+                    <td>Email</td>
+                    <td>Telefono</td>
+                    <td>Localidad</td>
+                    <td>Acciones</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+
+        
     </body>
 </html>
