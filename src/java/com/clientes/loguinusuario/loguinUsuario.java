@@ -6,8 +6,13 @@
 
 package com.clientes.loguinusuario;
 
+import com.cliente.conexion.ConexionBD;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -42,7 +47,28 @@ public class loguinUsuario extends HttpServlet {
         if(user != null & pass != null)
         {
             HttpSession session = request.getSession(true);
-            
+            if(session.getAttribute("user") != null)
+            {
+               try{
+                Connection cnn = ConexionBD.conexion();
+                Statement st = cnn.createStatement();
+                ResultSet rs = st.executeQuery("SELECT * FROM clientes WHERE nombre = '"+user+"'"
+                        + "password = '"+pass+"'");
+                while(rs.next()){
+                    session.setAttribute("us", rs.getString("nombre"));
+                    response.sendRedirect("listadoClientes.jsp");                    
+                }
+                
+                st.close();
+                rs.close();
+                
+               }catch(SQLException er)
+               {
+                   out.println("No se encontro resultados");
+               }
+                
+            }
+            response.sendRedirect("index.html");
         }
             
         
