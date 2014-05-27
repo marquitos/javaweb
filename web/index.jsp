@@ -1,9 +1,11 @@
+<%-- 
+    Document   : index
+    Created on : 28-may-2014, 0:29:15
+    Author     : marcos
+--%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
 <html>
     <head>
         <title>Logueo de usuario</title>        

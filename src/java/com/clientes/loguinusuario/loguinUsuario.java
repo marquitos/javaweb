@@ -42,19 +42,21 @@ public class loguinUsuario extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         
-        user = request.getParameter("user");
-        pass = request.getParameter("pass");
-        if(user != null & pass != null)
+        this.user = request.getParameter("user");
+        this.pass = request.getParameter("pass");
+        
+        if(user != null && pass != null)
         {
             HttpSession session = request.getSession(true);
-            if(session.getAttribute("user") != null)
+            if(session.getAttribute("user") == null)
             {
+                
                try{
                 Connection cnn = ConexionBD.conexion();
                 Statement st = cnn.createStatement();
                 ResultSet rs = st.executeQuery("SELECT * FROM clientes WHERE nombre = '"+user+"'"
                         + "password = '"+pass+"'");
-                while(rs.next()){
+                if(rs.next()){
                     session.setAttribute("us", rs.getString("nombre"));
                     response.sendRedirect("listadoClientes.jsp");                    
                 }
@@ -68,7 +70,8 @@ public class loguinUsuario extends HttpServlet {
                }
                 
             }
-            response.sendRedirect("index.html");
+            
+            response.sendRedirect("errorLogueo.jsp");
         }
             
         
