@@ -26,7 +26,7 @@ import javax.servlet.http.HttpSession;
  */
 @WebServlet(name = "loguinUsuario", urlPatterns = {"/loguinUsuario"})
 public class loguinUsuario extends HttpServlet {
-    private String nombre,user, pass;
+    private String nombre,user, pass, attnombre;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -46,32 +46,27 @@ public class loguinUsuario extends HttpServlet {
         this.pass = request.getParameter("pass");
         
         if(user != null && pass != null)
-        {
-            HttpSession session = request.getSession(true);
-            if(session.getAttribute("user") == null)
-            {
-                
+        {            
+           HttpSession session = request.getSession(true);
+                                         
                try{
                 Connection cnn = ConexionBD.conexion();
                 Statement st = cnn.createStatement();
-                ResultSet rs = st.executeQuery("SELECT * FROM clientes WHERE nombre = '"+user+"'"
-                        + "password = '"+pass+"'");
+                ResultSet rs = st.executeQuery("SELECT * FROM clientes WHERE nombre = '"+this.user+"' and "
+                        + "password = '"+this.pass+"'");
                 if(rs.next()){
-                    session.setAttribute("us", rs.getString("nombre"));
-                    response.sendRedirect("listadoClientes.jsp");                    
+                    this.attnombre = rs.getString("nombre");
+                    session.setAttribute("us", attnombre);
+                    response.sendRedirect("listadoCliente.jsp");                    
+                }else{
+                    response.sendRedirect("errorLogueo.jsp");
+                    
                 }
-                
-                st.close();
-                rs.close();
-                
                }catch(SQLException er)
                {
-                   out.println("No se encontro resultados");
+                   out.println("No se encontro resultados" + er.getMessage());
                }
-                
-            }
-            
-            response.sendRedirect("errorLogueo.jsp");
+           
         }
             
         

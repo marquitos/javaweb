@@ -12,6 +12,6 @@
         <title>Error...</title>
     </head>
     <body>
-        <h1>Error de logueo....</h1>
+        <h1>${sessionScope.us}</h1>
     </body>
 </html>

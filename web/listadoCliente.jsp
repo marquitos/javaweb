@@ -27,6 +27,7 @@
                     <td>Telefono</td>
                     <td>Localidad</td>
                     <td>Acciones</td>
+                    <td>${sessionScope.us}</td>
                 </tr>
                 <tr>
                     <td></td>

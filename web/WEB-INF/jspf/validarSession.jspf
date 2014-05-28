@@ -4,7 +4,7 @@
     String nombre = (String)session.getAttribute("us");
     if(nombre == null)
     {        
-        response.sendRedirect("index.html");
+        response.sendRedirect("index.jsp");
     }
 
 %>
