@@ -8,6 +8,9 @@ package com.cliente.conexion;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import javax.ejb.Stateless;
 
 /**
@@ -34,6 +37,20 @@ public class ConexionBD {
         }
     
         return con;
+    }
+    
+    public static ResultSet query_all()
+    {
+        ResultSet rs = null;
+       try{ 
+        Connection cnn = ConexionBD.conexion();
+        Statement st = cnn.createStatement();
+        rs = st.executeQuery("SELECT * FROM clientes");
+       }catch(SQLException ex)
+       {
+           System.out.println("Error en la BD..." + ex.getMessage());
+       }
+       return rs;
     }
             
         
