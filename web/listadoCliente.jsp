@@ -21,7 +21,7 @@
     <body>
         <a href="agregarCliente.jsp">Agregar Clientes</a> -
         <a href="salir.jsp">Salir</a>
-        <a href="listaTotal">Listar Clientes</a>
+        <a href="listadoClientes">Listar Clientes</a>
         <table border="0">
             
             <tbody>

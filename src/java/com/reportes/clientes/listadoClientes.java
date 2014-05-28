@@ -4,22 +4,30 @@
  * and open the template in the editor.
  */
 
-package com.reporte.listado;
+package com.reportes.clientes;
 
+import com.cliente.conexion.ConexionBD;
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Connection;
+import java.util.HashMap;
+import java.util.Map;
 import javax.servlet.ServletException;
+import javax.servlet.ServletOutputStream;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperRunManager;
 
 /**
  *
  * @author marcos
  */
-@WebServlet(name = "listaTotal", urlPatterns = {"/listaTotal"})
-public class listaTotal extends HttpServlet {
+@WebServlet(name = "listadoClientes", urlPatterns = {"/listadoClientes"})
+public class listadoClientes extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -33,9 +41,32 @@ public class listaTotal extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            
+        //PrintWriter out = response.getWriter();
+        
+        try{
+            Connection con = ConexionBD.conexion();                
+          /*Establecemos la ruta del reporte*/ 
+          File reportFile = new File(request.getSession(true).getServletContext().getRealPath("/reportes/listadoClientes.jasper")); 
+          // getServletContext() nos devuelve a que session pertenece
+          /* No enviamos parámetros porque nuestro reporte no los necesita asi que escriba cualquier cadena de texto ya que solo seguiremos el formato del método runReportToPdf*/ 
+          Map parameters = new HashMap();                   
+         // parameters.put("idCliente", idCliente); 
+          /*Enviamos la ruta del reporte, los parámetros y la conexión(objeto Connection)*/ 
+          byte[] bytes = JasperRunManager.runReportToPdf(reportFile.getPath(), parameters, con); 
+          /*Indicamos que la respuesta va a ser en formato PDF*/ 
+          response.setContentType("application/pdf"); 
+          response.setContentLength(bytes.length);
+          ServletOutputStream ouputStream = response.getOutputStream();
+          ouputStream.write(bytes, 0, bytes.length);
+          /*Limpiamos y cerramos flujos de salida*/ 
+          ouputStream.flush(); 
+          ouputStream.close(); 
+        
+        }catch(JRException jre)
+        {
+            jre.getMessage();
         }
+            
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
