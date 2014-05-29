@@ -35,7 +35,7 @@
                     <td>Acciones</td>
                     <td>${sessionScope.us}</td>
                 </tr>
-                <% if(resul.next()){%>
+                <% while(resul.next()){%>
                 <tr>
                     <td> <% out.println(resul.getString("nombre"));%> </td>
                     <td><% out.println(resul.getString("apellido"));%></td>
