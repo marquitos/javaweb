@@ -59,7 +59,7 @@ public class loguinUsuario extends HttpServlet {
                     session.setAttribute("us", attnombre);
                     response.sendRedirect("listadoCliente.jsp");                    
                 }else{
-                    response.sendRedirect("errorLogueo.jsp");
+                    response.sendRedirect("errorLogueo.jsp");                    
                     
                 }
                }catch(SQLException er)
