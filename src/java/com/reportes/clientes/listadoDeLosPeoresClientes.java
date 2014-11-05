@@ -9,7 +9,7 @@ package com.reportes.clientes;
 /**
  *
  * @author marcos
- */ 
-public class listadoDeLosMejoresclientes {
+ */
+public class listadoDeLosPeoresClientes {
     
 }
