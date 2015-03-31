@@ -6,4 +6,15 @@
 
 package com.reportes.clientes;
 
-public class listadoClientes{}
+public class listadoClientes{
+
+
+
+ public listadoClientes(){
+ 
+     System.err.println("Probando el svc GIT");
+ }
+
+
+
+}
