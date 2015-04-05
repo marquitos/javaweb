@@ -15,6 +15,8 @@ public class listadoClientes{
      System.err.println("Probando el svc GIT");
      
       System.err.println("Probando el svc GIT el comando Diff");
+      
+      System.err.println("Se actualizo el repositorio");
  }
 
 
